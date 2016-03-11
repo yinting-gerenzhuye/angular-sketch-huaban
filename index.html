@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sketch">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Sketch</title>
+	<script src="angular.js"></script>
+	<script src="index.js"></script>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body ng-controller="myctrl">
+	<div class="controls">
+     <span class="word">画布宽</span>
+	<input class="WHset" type="range" ng-model="canvasWH.width" min="400" max="800" step="1">
+	<span class="word">画布高</span>
+    <input class="WHset" type="range" ng-model="canvasWH.height" min="400" max="800" step="1">
+        <ul class="toolall">
+	        <li ng-repeat="(key, value) in tools track by $index" ng-click="choosetool(value)" ng-class="{active:value==tool}">
+		       <span>{{key}}</span>
+	        </li>
+        </ul>
+        <hr>
+        <!-- <input type="text" ng-model="tool"> -->
+        <div ng-click="choosestyle('stroke')" ng-class="{active:csState.style=='stroke'}"><span class="chosty">画线</span><input ng-model="csState.strokestyle" type="color"></div>
+        <span class="word">线宽</span> 
+        <input class="xian" type="range" ng-model="csState.linewidth" min="1" max="30" step="1">
+        <div ng-click="choosestyle('fill')" ng-class="{active:csState.style=='fill'}"><span class="chosty">填充</span><input ng-model="csState.fillstyle" type="color"></div>  
+        <a ng-click="save($event)" class="save">保存</a>
+        <div ng-click="newsketch()" class="create">新建</div>
+        <div class="back">回退</div>
+	</div>
+	<div class="showpaint">
+		<canvas id="mycanvas" width="{{canvasWH.width}}" height="{{canvasWH.height}}"></canvas>
+	</div>
+</body>
+</html>
